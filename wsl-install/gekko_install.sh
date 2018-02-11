@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 echo "-------------------------------------------"
-echo 'INSTALLING NODE + DEPENDECIES + GEKKO'
+echo 'INSTALLING GEKKO + DEPENDECIES'
 echo '-------------------------------------------'
 echo 'This will take a while, go get some coffe'
 sleep 3
@@ -13,6 +13,7 @@ apt-get install build-essential -y
 apt-get install git -y
 cd /mnt/c/
 mkdir www
+cd www
 git clone git://github.com/askmike/gekko.git
 cd gekko
 npm install --only=production
