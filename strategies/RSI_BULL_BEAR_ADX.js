@@ -10,8 +10,8 @@
 */
 
 // req's
-var log = require ('../core/log.js');
-var config = require ('../core/util.js').getConfig();
+var log = require('../core/log.js');
+var config = require('../core/util.js').getConfig();
 
 // strategy
 var strat = {
@@ -19,12 +19,14 @@ var strat = {
 	/* INIT */
 	init: function()
 	{
+		// core
 		this.name = 'RSI Bull and Bear + ADX';
 		this.requiredHistory = config.tradingAdvisor.historySize;
-		this.resetTrend();		
+		this.resetTrend();
+		this.hasRequiredHistory = false;
 		
-		// debug? set to flase to disable all logging/messages/stats (improves performance)
-		this.debug = false;
+		// debug? set to false to disable all logging/messages/stats (improves performance in backtests)
+		this.debug = true;
 		
 		// performance
 		config.backtest.batchSize = 1000; // increase performance
@@ -93,6 +95,22 @@ var strat = {
 	},
 	
 	
+	/* UPDATE */
+	update: function()
+	{
+		// Check if there's enough history to actually see the longer trend
+		if( this.age < this.settings.SMA_long )
+		{
+			log.debug('Not enough historical data / Gekko did not downloaded it. Defaulting to BEAR trend');
+		}
+		else if( !this.hasRequiredHistory )
+		{
+			this.hasRequiredHistory = true;
+			log.debug('All is well, you have enough historical data to see the longer trend. Good for you.');
+		}
+	},
+	
+	
 	/* CHECK */
 	check: function()
 	{
@@ -102,7 +120,6 @@ var strat = {
 			maFast = ind.maFast.result.result,
 			rsi,
 			adx = ind.ADX.result.result;
-		
 		
 			
 		// BEAR TREND
