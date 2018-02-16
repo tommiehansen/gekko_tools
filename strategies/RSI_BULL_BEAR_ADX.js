@@ -101,12 +101,12 @@ var strat = {
 		// Check if there's enough history to actually see the longer trend
 		if( this.age < this.settings.SMA_long )
 		{
-			log.debug('Not enough historical data / Gekko did not downloaded it. Defaulting to BEAR trend');
+			log.info('Not enough historical data / Gekko did not downloaded it. Defaulting to BEAR trend');
 		}
 		else if( !this.hasRequiredHistory )
 		{
 			this.hasRequiredHistory = true;
-			log.debug('All is well, you have enough historical data to see the longer trend. Good for you.');
+			log.info('All is well, you have enough historical data to see the longer trend. Good for you.');
 		}
 	},
 	
