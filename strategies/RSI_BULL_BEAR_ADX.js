@@ -23,7 +23,7 @@ var strat = {
 		this.resetTrend();
 		
 		// debug? set to false to disable all logging/messages/stats (improves performance in backtests)
-		this.debug = true;
+		this.debug = false;
 		
 		// performance
 		config.backtest.batchSize = 1000; // increase performance
@@ -60,8 +60,9 @@ var strat = {
 			};
 		}
 		
+		/* MESSAGES */
+		
 		// message the user about required history
-		console.clear();
 		log.info("====================================");
 		log.info('Running', this.name);
 		log.info('====================================');
