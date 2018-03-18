@@ -28,7 +28,7 @@ var strat = {
 		this.resetTrend();
 		
 		// debug? set to false to disable all logging/messages/stats (improves performance in backtests)
-		this.debug = false;
+		this.debug = true;
 		
 		// performance
 		config.backtest.batchSize = 1000; // increase performance
@@ -126,13 +126,12 @@ var strat = {
 			maFast = ind.maFast.result,
 			rsi,
 			adx = ind.ADX.result;
-		
 			
 		// BEAR TREND
 		// NOTE: maFast will always be under maSlow if maSlow can't be calculated
 		if( maFast < maSlow )
 		{
-			rsi = ind.BEAR_RSI.result.result;
+			rsi = ind.BEAR_RSI.result;
 			let rsi_hi = this.settings.BEAR_RSI_high,
 				rsi_low = this.settings.BEAR_RSI_low;
 			
@@ -149,7 +148,7 @@ var strat = {
 		// BULL TREND
 		else
 		{
-			rsi = ind.BULL_RSI.result.result;
+			rsi = ind.BULL_RSI.result;
 			let rsi_hi = this.settings.BULL_RSI_high,
 				rsi_low = this.settings.BULL_RSI_low;
 			
