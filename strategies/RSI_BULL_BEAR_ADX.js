@@ -5,6 +5,11 @@
 	-
 	(CC-BY-SA 4.0) Tommie Hansen
 	https://creativecommons.org/licenses/by-sa/4.0/
+	-
+	NOTE: Requires custom indicators found here:
+	https://github.com/Gab0/Gekko-extra-indicators
+	(c) Gabriel Araujo
+	Howto: Download + add to gekko/strategies/indicators
 */
 
 // req's
@@ -27,19 +32,19 @@ var strat = {
 		
 		// performance
 		config.backtest.batchSize = 1000; // increase performance
-		config.silent = true;
+		config.silent = true; // NOTE: You may want to set this to 'false' @ live
 		config.debug = false;
 		
 		// SMA
-		this.addTulipIndicator('maSlow', 'sma', { optInTimePeriod: this.settings.SMA_long });
-		this.addTulipIndicator('maFast', 'sma', { optInTimePeriod: this.settings.SMA_short });
+		this.addIndicator('maSlow', 'SMA', this.settings.SMA_long );
+		this.addIndicator('maFast', 'SMA', this.settings.SMA_short );
 		
 		// RSI
-		this.addTulipIndicator('BULL_RSI', 'rsi', { optInTimePeriod: this.settings.BULL_RSI });
-		this.addTulipIndicator('BEAR_RSI', 'rsi', { optInTimePeriod: this.settings.BEAR_RSI });
+		this.addIndicator('BULL_RSI', 'RSI', { interval: this.settings.BULL_RSI });
+		this.addIndicator('BEAR_RSI', 'RSI', { interval: this.settings.BEAR_RSI });
 		
 		// ADX
-		this.addTulipIndicator('ADX', 'adx', { optInTimePeriod: this.settings.ADX })
+		this.addIndicator('ADX', 'ADX', this.settings.ADX );
 		
 		// MOD (RSI modifiers)
 		this.BULL_MOD_high = this.settings.BULL_MOD_high;
@@ -116,14 +121,15 @@ var strat = {
 	check: function()
 	{
 		// get all indicators
-		let ind = this.tulipIndicators,
-			maSlow = ind.maSlow.result.result,
-			maFast = ind.maFast.result.result,
+		let ind = this.indicators,
+			maSlow = ind.maSlow.result,
+			maFast = ind.maFast.result,
 			rsi,
-			adx = ind.ADX.result.result;
+			adx = ind.ADX.result;
 		
 			
 		// BEAR TREND
+		// NOTE: maFast will always be under maSlow if maSlow can't be calculated
 		if( maFast < maSlow )
 		{
 			rsi = ind.BEAR_RSI.result.result;
