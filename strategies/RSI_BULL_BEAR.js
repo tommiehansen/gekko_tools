@@ -31,10 +31,10 @@ var strat = {
 		config.debug = false;
 		
 		// add indicators
-		this.addTulipIndicator('maSlow', 'sma', { optInTimePeriod: this.settings.SMA_long });
-		this.addTulipIndicator('maFast', 'sma', { optInTimePeriod: this.settings.SMA_short });
-		this.addTulipIndicator('BULL_RSI', 'rsi', { optInTimePeriod: this.settings.BULL_RSI });
-		this.addTulipIndicator('BEAR_RSI', 'rsi', { optInTimePeriod: this.settings.BEAR_RSI });
+		this.addIndicator('maSlow', 'SMA', this.settings.SMA_long );
+		this.addIndicator('maFast', 'SMA', this.settings.SMA_short );
+		this.addIndicator('BULL_RSI', 'RSI', { interval: this.settings.BULL_RSI });
+		this.addIndicator('BEAR_RSI', 'RSI', { interval: this.settings.BEAR_RSI });
 		
 		// debug stuff
 		this.startTime = new Date();
@@ -80,15 +80,15 @@ var strat = {
 	{
 		
 		// get all indicators
-		let ind = this.tulipIndicators,
-			maSlow = ind.maSlow.result.result,
-			maFast = ind.maFast.result.result,
+		let ind = this.indicators,
+			maSlow = ind.maSlow.result,
+			maFast = ind.maFast.result,
 			rsi;
 			
 		// BEAR TREND
 		if( maFast < maSlow )
 		{
-			rsi = ind.BEAR_RSI.result.result;
+			rsi = ind.BEAR_RSI.result;
 			if( rsi > this.settings.BEAR_RSI_high ) this.short();
 			else if( rsi < this.settings.BEAR_RSI_low ) this.long();
 			
@@ -99,7 +99,7 @@ var strat = {
 		// BULL TREND
 		else
 		{
-			rsi = ind.BULL_RSI.result.result;
+			rsi = ind.BULL_RSI.result;
 			if( rsi > this.settings.BULL_RSI_high ) this.short();
 			else if( rsi < this.settings.BULL_RSI_low )  this.long();
 			if(this.debug) this.lowHigh( rsi, 'bull' );
