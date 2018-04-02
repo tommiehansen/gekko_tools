@@ -9,6 +9,9 @@ gDir='../gekko'
 
 outputDir="sync"
 
+# get latest file from github
+git pull
+
 # colors
 grn=$'\e[1;32m'
 yel=$'\e[1;33m'
