@@ -1,3 +1,4 @@
 gitpush.sh
 *.tar
 *.gz
+cli/config.sh

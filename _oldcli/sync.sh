@@ -2,7 +2,7 @@
 clear
 
 # dirs -- must be a valid path to Gekko obviously
-gDir='../gekko'
+gDir='../../gekko'
 
 outputDir="sync"
 mkdir -p $outputDir
@@ -45,7 +45,7 @@ transfer() {
 		then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
 		return 1;
 	fi
-	
+
 	tmpfile=$( mktemp -t transferXXX );
 	if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
 		curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
@@ -56,7 +56,7 @@ transfer() {
 	file=$(cat $tmpfile);
 	cat > $outputDir/last.txt <<< $file
 	rm -f $tmpfile;
-} 
+}
 
 printf "${grn}Uploading to transfer.sh, please wait...${end}\n\n"
 

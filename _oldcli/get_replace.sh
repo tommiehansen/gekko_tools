@@ -5,7 +5,7 @@ clear
 
 # primary Gekko dir -- must be a valid path to your Gekko obviously (!)
 # below will assume that you got e.g. /www/gekko_tools and /www/gekko, else change this.
-gDir='../gekko'
+gDir='../../gekko'
 
 outputDir="sync"
 
@@ -31,7 +31,7 @@ get() {
 	echo
 	echo
 	curl "$1" >> $saveFile;
-} 
+}
 
 # get the file
 printf "Downloading file ${yel}$file${end}, please stand by...";
