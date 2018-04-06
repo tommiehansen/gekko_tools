@@ -27,8 +27,8 @@ fi
 # import user config
 source config.sh
 
-file=$(cat $outputDir/last.txt)
 outputDir="lastupload"
+file=$(cat $outputDir/last.txt)
 saveFile="$outputDir/sync.tar.gz";
 
 # get $filename function
