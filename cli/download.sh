@@ -27,9 +27,9 @@ fi
 # import user config
 source config.sh
 
-outputDir="lastupload"
 file=$(cat $outputDir/last.txt)
-saveFile='sync.tar.gz';
+outputDir="lastupload"
+saveFile="$outputDir/sync.tar.gz";
 
 # get $filename function
 get() {
@@ -55,11 +55,11 @@ echo
 
 # sync new > old (and replace)
 colorize "Replacing old with new @ <light-yellow>$gekkoDir/history</light-yellow>\n"
-rsync -ah gekko/* $gekkoDir/history
+rsync -ah gekko/* $gekkoDir
 echo
 
 # remove crap
 rm -rf gekko
-rm -rf sync.tar.gz
+rm -rf "$outputDir/sync.tar.gz"
 
 colorize "<light-green>Completed.</light-green>\n"

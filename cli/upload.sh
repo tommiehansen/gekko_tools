@@ -33,7 +33,7 @@ colorize "COMPRESSING HISTORY DIRECTORY \n---\nDestination folder: <light-yellow
 colorize "<light-green>Please wait, it might take a while...</light-green>\n"
 
 # compress
-tar -czf "$outputDir/sync.tar.gz" -C $historyDir .
+tar -czf "$outputDir/sync.tar.gz" $historyDir
 
 # msg
 colorize "<light-yellow>Compression completed.</light-yellow>\n"
