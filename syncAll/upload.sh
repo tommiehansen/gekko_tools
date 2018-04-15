@@ -8,7 +8,7 @@ outputDir="sync"
 mkdir -p $outputDir
 
 # dir string
-DIRS="$gDir/strategies $gDir/config $gDir/web/vue/UIconfig.js"
+DIRS="$gDir/strategies $gDir/config"
 
 # colors
 red=$'\e[1;31m'
