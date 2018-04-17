@@ -2,3 +2,4 @@ gitpush.sh
 *.tar
 *.gz
 cli/config.sh
+syncAll/config.sh

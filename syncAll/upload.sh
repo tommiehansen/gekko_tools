@@ -1,15 +1,6 @@
 #!/bin/bash
 clear
 
-# dirs -- must be a valid path to Gekko obviously
-gDir='../../gekko'
-
-outputDir="sync"
-mkdir -p $outputDir
-
-# dir string
-DIRS="$gDir/strategies $gDir/config"
-
 # colors
 red=$'\e[1;31m'
 grn=$'\e[1;32m'
@@ -18,6 +9,23 @@ blu=$'\e[1;34m'
 mag=$'\e[1;35m'
 cyn=$'\e[1;36m'
 end=$'\e[0m'
+
+# check config.sh
+if [ ! -f config.sh ]; then
+    printf "${red}ERROR${end} config.sh could not be found, copy config.sample.sh and modify to suit your needs!\n"
+    return
+fi
+
+# import user config ($gDir)
+source config.sh
+
+outputDir="sync"
+mkdir -p $outputDir
+
+# dir string
+DIRS="$gDir/strategies $gDir/config"
+
+
 
 # ask user if history should be included or not
 read -p "${yel}Include history?${end} [y/n]: " -n 1 -r
