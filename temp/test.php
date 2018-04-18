@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+	<title># TEST</title>
 	<style>
 	html {font-size: 62.5%; }
 	body{padding:2% 0;font-family:monospace,mono-space;font-size:1.5rem;color:deeppink;text-align:center;overlow-x:hidden}*,:after,:before{box-sizing:border-box}body,html{height:100%}
@@ -18,6 +19,7 @@
 	section { max-width: 600px; position: relative; margin:0 auto; }
 	
 	/* pre stuff */
+	pre { margin-bottom: 30px; }
 	pre:nth-child(2n+1){ border-color: deeppink; color: deeppink; }
 	pre:nth-child(3n+1){ border-color: cyan; color: cyan; }
 	pre:focus,pre:hover{color:#fff;border-color:lime; }
@@ -101,7 +103,8 @@
 	}
 	
 	$files = array_values($files); // re-index
-	#prp($files);
+	echo 'history files';
+	prp($files);
 	
 	
 	
@@ -111,48 +114,35 @@
 		TRY SQLite STUFF
 	*/
 	
-	
-	// TEMP: get file 0
-	$file = $paths->history . $files[0];
-	
-	// init $db
-	$db = new PDO('sqlite:' . $file) or die('<b>ERROR</b> Could not connect to database.');
+	// init $db, TEMP: use first db
+	$first = $paths->history . $files[0];
+	$db = new PDO('sqlite:' . $first) or die('<b>ERROR</b> Could not connect to database.');
 	$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 	
-	// attach all other databases
-	$attach = "
-		ATTACH DATABASE %file AS %file;
-	";
-	trim($attach);
-	$sql = "";
-	foreach( $files as $file ){
-		$sql .= str_replace('%file', $file, $attach);
-	}
-	prp( $sql );
-	#$db->exec();
-	
-	// get all tables for $file
 	$sql = "
 		SELECT name
-		FROM sqlite_master
+		FROM main.sqlite_master
 		WHERE type = 'table'
 	";
 	
 	$tables = $db->query($sql);
 	$tables = $tables->fetchAll();
 	
-	// filter out tables containg candles_
+	
+	// filter out tables not containg candles_
 	foreach( $tables as $key => $val )
 	{
 		$cur = $tables[$key];
 		$name = $val['name'];		
-		if( !contains('candles_', $name) ) unset($tables[$key]);
+		if( !contains('candles_', $name) || contains('sqlite', $name) ) unset($tables[$key]);
 	}
 	
+	echo 'tables';
 	prp($tables);
 	
 	
-	
+	// get min/max
+	echo 'min/max';
 	$stuff = minMax($db, $tables[0]['name']);
 	prp($stuff);
 	
