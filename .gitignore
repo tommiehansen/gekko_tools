@@ -3,3 +3,4 @@ gitpush.sh
 *.gz
 cli/config.sh
 syncAll/config.sh
+user.config.php
