@@ -97,7 +97,8 @@
 	$files = listFiles( $paths->history );
 	
 	// ..then remove any not ending with '.db'
-	foreach($files as $key => $value) {
+	foreach($files as $key => $value)
+	{
 		$cur = end(explode('.', $files[$key]));	// explode + get last	
 		if( $cur !== 'db' ) unset($files[$key]);
 	}
