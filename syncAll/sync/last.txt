@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 https://transfer.sh/FrW09/sync.tar.gz
+=======
+https://transfer.sh/xU6Di/sync.tar.gz
+>>>>>>> eb74abfe7f8e9588a2611bb0113e9dbb797a6eef

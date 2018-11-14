@@ -29,6 +29,9 @@ Above will take some time, expect it to take 10-20 minutes.
 12. git clone git://github.com/askmike/gekko.git
 13. cd gekko
 14. npm install --only=production
+cd exchange
+npm install --only=production
+cd ..
 15. npm install tulind
 16. apt-get autoremove -y
 17. node gekko --ui

@@ -17,7 +17,10 @@ cd www
 git clone git://github.com/askmike/gekko.git
 cd gekko
 npm install --only=production
+cd exchange
+npm install --only=production
+cd ..
 npm install tulind
-apt-get install nano -y && apt-get install jed -y
+apt-get install nano -y
 apt-get autoremove -y
 node gekko --ui
