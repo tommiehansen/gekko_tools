@@ -74,7 +74,7 @@ var strat = {
 		log.info("Make sure your warmup period matches SMA_long and that Gekko downloads data if needed");
 		
 		// warn users
-		if( this.requiredHistory < this.settings.SMA_long )
+		if( this.requiredHistory < this.settings.SMA.long )
 		{
 			log.warn("*** WARNING *** Your Warmup period is lower then SMA_long. If Gekko does not download data automatically when running LIVE the strategy will default to BEAR-mode until it has enough data.");
 		}
